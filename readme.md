@@ -1,6 +1,6 @@
 # Download and run nexus on a server and Push docker images to nexus and fetch docker images from nexus
 
-In this repo i combined the steps to download and run nexus on a server ( of ubuntu os)
+In this repo i combined the steps to download and run nexus on a server ( of ubuntu os) and aslo how to push docker image to nexus and fecth docker images from nexus
 
 ---
 
