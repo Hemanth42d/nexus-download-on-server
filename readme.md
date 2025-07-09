@@ -1,4 +1,4 @@
-# Download and run nexus on a server and Push docker images to nexus and fetch docker images from nexus
+# Download and run nexus on a server and Push docker images to nexus and fetch docker images from nexus (Run nexus as a container on server)
 
 In this repo i combined the steps to download and run nexus on a server ( of ubuntu os) and aslo how to push docker image to nexus and fecth docker images from nexus
 
@@ -88,3 +88,26 @@ cat /opt/sonatype-work/nexus3/admin.password
 
 12) can fetch from nexus
     - curl -u nexus-user:nexus-password -X GET 'http:/ipaddress:port/service/rest/v1/components?repository=<Repo_name>
+
+---
+---
+
+## run docker as a container on server
+
+- create a server
+
+- update 
+	- sudo pt update
+
+- install docker suing snap
+	- sudo snap install docker
+
+- look for nexus3 image in docker hub
+
+- when we start nexus we need to configure volume for it for persistence of data by running it with mounted volume
+	- docker volume create --name nexus-data
+	- docker run -d -p 8081:8081 --name nexus -v nexus-data:/nexus-data sonatype/nexus3
+
+- check the running port whether nexus is running or not
+    - netstat -lnpt
+	- if not have netstat install it --> sudo apt install net-tools
