@@ -59,36 +59,32 @@ cat /opt/sonatype-work/nexus3/admin.password
 ## Push docker images to nexus and fetch docker images from nexus
 
 1) Create a Repository in nexus (example : docker-hosted-myapp)
+
 2) In order to start pushing the docker images to docker repository, we first need to login to nexus using a nexus user which has access to docker hosted repository
     . create a role that has privilege for access to docker hosted repository i.e the repo you pushing the image
+
 3)  Give permission for the user the docker role you just created
+
 4) configure a port for connecting to the repo as it can connect through the ipaddress:8081/repository/repo_name
+
 5) allow the port connection (just done above) in firewall connection of the vm
+
 6) Realms --> docker login we get token of authentication of docker repo from nexus to docker client and token is stored in /docker.config.json will include all the authentication i made to all the different docker repositories.
+
 7) last thing is to do in docker-desktop configure docker client to allow our docker registory to allow as insecurity registry 
-    . in Linux : /etc/docker/daemon.json
-    . in docker-desktop : { "insecure-registries": ["ipaddress:8083"] }
+    - in Linux : /etc/docker/daemon.json
+    - in docker-desktop : { "insecure-registries": ["ipaddress:8083"] }
+
 8) docker login in your local machine 
-    . docker login ipaddress:portnumber(configured for connecting in step 	the credentials here needs to be the necus users credentials
+    - docker login ipaddress:portnumber(configured for connecting in step 	the credentials here needs to be the necus users credentials
+
 9) build the image and re tag it
-    . docker tag my-app:1.0 <ipaddress>:<port of repo>/my-app:1.0
+    - docker tag my-app:1.0 <ipaddress>:<port of repo>/my-app:1.0
+
 10) Now push the image with complete name
-    . docker push <ipaddress>:<port of repo>/my-app:1.0
+    - docker push <ipaddress>:<port of repo>/my-app:1.0
+
 11) now we can see the image in the nexus browse tab under repositories
+
 12) can fetch from nexus
-    . curl -u nexus-user:nexus-password -X GET 'http:/ipaddress:port/service/rest/v1/components?repository=<Repo_name>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    - curl -u nexus-user:nexus-password -X GET 'http:/ipaddress:port/service/rest/v1/components?repository=<Repo_name>
